@@ -1,6 +1,7 @@
 import pandas as pd
 import re
 from sklearn.preprocessing import MultiLabelBinarizer
+from sklearn.feature_extraction.text import TfidfVectorizer
 
 df = pd.read_json("csfd_movies.jsonl", lines=True)
 
@@ -19,6 +20,7 @@ df["text"] = df["title"] + " " + df["description_clean"]
 mlb = MultiLabelBinarizer()
 Y = mlb.fit_transform(df["genres"])
 
-
+vectorizer = TfidfVectorizer(max_features=50000,ngram_range=(1,2),min_df=5,max_df=0.9)
+X = vectorizer.fit_transform(df["text"])
 
 
