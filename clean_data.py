@@ -1,8 +1,10 @@
 import pandas as pd
 import re
+from sklearn.linear_model import LogisticRegression
 from sklearn.preprocessing import MultiLabelBinarizer
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.model_selection import train_test_split
+from sklearn.multiclass import OneVsRestClassifier
 
 df = pd.read_json("csfd_movies.jsonl", lines=True)
 
@@ -25,5 +27,11 @@ vectorizer = TfidfVectorizer(max_features=50000,ngram_range=(1,2),min_df=5,max_d
 X = vectorizer.fit_transform(df["text"])
 
 X_train, X_test, y_train, y_test = train_test_split(X,Y,test_size=0.2, random_state=11)
+
+model = OneVsRestClassifier(LogisticRegression(max_iter=2000))
+
+model.fit(X_train, y_train)
+
+y_pred = model.predict(X_test)
 
 
