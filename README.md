@@ -59,7 +59,7 @@ python -m venv .venv
 ```
 pip install -r requirements.txt
 ```
-4. Spusťte aplikace:
+4. Spusťte aplikaci:
 ```
 python app.py
 ```
