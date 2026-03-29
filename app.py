@@ -34,14 +34,13 @@ def index():
             message = "Prosím vyplň název filmu i popis."
         else:
             text = title + " " + clean_text(description)
-
             X_input = vectorizer.transform([text])
-
             y_prob = model.predict_proba(X_input)
             threshold = 0.5
             y_pred = (y_prob >= threshold).astype(int)
-
             predicted_genres = list(mlb.inverse_transform(y_pred)[0])
+
+            print("Predicted genres:", predicted_genres)
 
             if len(predicted_genres) == 0:
                 message = "Model nenašel žádný dostatečně pravděpodobný žánr."
