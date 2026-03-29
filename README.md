@@ -16,7 +16,7 @@ Tento projekt umožňuje predikovat žánry filmů na základě titulku a popisu
   
 ---
 
-## Distribuce žánrů v datasetu
+## Distribuce žánrů v použitém datasetu
 | Žánr    | Počet filmů |
 | -------- | ------- |
 | Drama  | 6340    |
