@@ -40,8 +40,6 @@ def index():
             y_pred = (y_prob >= threshold).astype(int)
             predicted_genres = list(mlb.inverse_transform(y_pred)[0])
 
-            print("Predicted genres:", predicted_genres)
-
             if len(predicted_genres) == 0:
                 message = "Model nenašel žádný dostatečně pravděpodobný žánr."
 

@@ -7,8 +7,6 @@ from sklearn.model_selection import train_test_split
 from sklearn.multiclass import OneVsRestClassifier
 import pickle
 
-
-
 def clean_text(text):
     text = text.lower()
     text = re.sub(r"\(oficiální text distributora\)", "", text)
