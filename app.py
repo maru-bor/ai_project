@@ -36,7 +36,10 @@ def index():
             text = title + " " + clean_text(description)
 
             X_input = vectorizer.transform([text])
-            y_pred = model.predict(X_input)
+
+            y_prob = model.predict_proba(X_input)
+            threshold = 0.5
+            y_pred = (y_prob >= threshold).astype(int)
 
             predicted_genres = list(mlb.inverse_transform(y_pred)[0])
 
