@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Predikce žánrů filmu</title>
+    <link href="../static/style.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1>Predikce žánrů filmu</h1>
+        <p class="intro">Zadej název a popis filmu a model odhadne jeho žánry.</p>
+        <p><strong>Poznámka:</strong> Model byl natrénován na českých filmových popiscích, proto nejlépe funguje s českým textem.</p>
+        <form method="POST">
+            <label for="title">Název filmu</label>
+            <input type="text" id="title" name="title" value="{{ title }}" required>
+
+            <label for="description">Popis filmu</label>
+            <textarea id="description" name="description" rows="8" required>{{ description }}</textarea>
+
+            <button type="submit">Predikovat žánry</button>
+        </form>
+
+        {% if message %}
+            <div class="message">{{ message }}</div>
+        {% endif %}
+
+        {% if predicted_genres %}
+            <div class="result">
+                <h2>Odhadované žánry</h2>
+                <div class="genres-wrapper">
+                    {% for genre in predicted_genres %}
+                        <span class="genre">{{ genre }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>

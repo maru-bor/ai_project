@@ -5,6 +5,7 @@ from sklearn.preprocessing import MultiLabelBinarizer
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.model_selection import train_test_split
 from sklearn.multiclass import OneVsRestClassifier
+import pickle
 
 def clean_text(text):
     text = text.lower()
@@ -39,4 +40,12 @@ model.fit(X_train, y_train)
 
 y_pred = model.predict(X_test)
 
+with open("model.dat", "wb") as f:
+    pickle.dump(model, f)
+
+with open("vectorizer.dat", "wb") as f:
+    pickle.dump(vectorizer, f)
+
+with open("mlb.dat", "wb") as f:
+    pickle.dump(mlb, f)
 
