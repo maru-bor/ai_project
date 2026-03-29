@@ -6,7 +6,6 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.model_selection import train_test_split
 from sklearn.multiclass import OneVsRestClassifier
 import pickle
-from collections import Counter
 
 
 
@@ -26,9 +25,6 @@ genres_to_remove = ["Katastrofický", "Road movie", "Muzikál", "Western"]
 df["genres"] = df["genres"].apply(remove_genres)
 df = df[df["genres"].apply(len) > 0]
 
-genre_counts = Counter(g for genres in df["genres"] for g in genres)
-
-print(genre_counts)
 
 df["description_clean"] = df["description"].apply(clean_text)
 df["text"] = df["title"] + " " + df["description_clean"]
