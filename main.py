@@ -5,7 +5,6 @@ from sklearn.preprocessing import MultiLabelBinarizer
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.model_selection import train_test_split
 from sklearn.multiclass import OneVsRestClassifier
-from sklearn.metrics import accuracy_score
 from sklearn.metrics import classification_report
 import pickle
 
@@ -46,4 +45,12 @@ y_pred = model.predict(X_test)
 
 # Odkomentovat pokud chcete vidět classification report modelu
 #print(classification_report(y_test, y_pred, target_names=mlb.classes_, zero_division=0))
+with open("model.dat", "wb") as f:
+    pickle.dump(model, f)
+
+with open("vectorizer.dat", "wb") as f:
+    pickle.dump(vectorizer, f)
+
+with open("mlb.dat", "wb") as f:
+    pickle.dump(mlb, f)
 
