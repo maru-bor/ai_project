@@ -6,6 +6,8 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.model_selection import train_test_split
 from sklearn.multiclass import OneVsRestClassifier
 from sklearn.metrics import classification_report
+import matplotlib.pyplot as plt
+from collections import Counter
 import pickle
 
 def clean_text(text):
@@ -24,6 +26,21 @@ genres_to_remove = ["Katastrofický", "Road movie", "Muzikál", "Western"]
 df["genres"] = df["genres"].apply(remove_genres)
 df = df[df["genres"].apply(len) > 0]
 
+genre_comb = df["genres"].apply(lambda genres: "+".join(sorted(genres)))
+comb_count = Counter(genre_comb)
+
+top_comb = comb_count.most_common(20)
+
+labels = [combo for combo, count in top_comb]
+values = [count for combo, count in top_comb]
+
+plt.figure(figsize=(14,8))
+plt.barh(labels, values)
+plt.xlabel("pocet filmu")
+plt.ylabel("kombinace zanru")
+plt.gca().invert_yaxis()
+plt.tight_layout()
+plt.show()
 
 df["description_clean"] = df["description"].apply(clean_text)
 df["text"] = df["title"] + " " + df["description_clean"]
