@@ -46,7 +46,7 @@ cd ai_project
 2. Vytvořte virtuální prostředí:
 - Unix / macOS:
 ```
-python3 -m venv .venv
+python -m venv .venv
 source .venv/bin/activate
 ```
 - Windows:
